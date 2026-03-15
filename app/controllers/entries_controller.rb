@@ -16,9 +16,10 @@ class EntriesController < ApplicationController
       @entry.image.attach(params["image"])
     end
 
-    @entry.save
-
-    redirect_to "/places/#{@entry["place_id"]}"
+    if @entry.save
+      redirect_to "/places/#{@entry["place_id"]}"
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
-
 end
