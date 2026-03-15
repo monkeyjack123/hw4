@@ -10,7 +10,6 @@ default: &default
 development:
   adapter: sqlite3
   database: db/development.sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
@@ -19,11 +18,12 @@ development:
 test:
   adapter: sqlite3
   database: db/test.sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 production:
   adapter: postgresql
   encoding: unicode
+  database: hw4_production
+  username: hw4
+  password: <%= ENV["HW4_DATABASE_PASSWORD"] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["DATABASE_URL"] %>
